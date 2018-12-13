@@ -63,6 +63,13 @@ module.exports = function(RED) {
                         node.send([{payload: null}, {payload: err}]);
                     });
             }
+
+            else {
+                var fall_thru_err_msg = "Sparkpost: Inputs/payload failed to trigger any conditions. msg= \n" +
+                    JSON.stringify(msg.payload, null, 2);
+                node.error(fall_thru_err_msg);
+                node.send([ { payload: null }, { payload: fall_thru_err_msg } ]);
+            }
         });
     }
     RED.nodes.registerType("subaccounts",Subaccounts);
