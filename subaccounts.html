@@ -1,0 +1,36 @@
+<script type="text/javascript">
+    RED.nodes.registerType('subaccounts',{
+        category: 'Sparkpost',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:2,
+        outputLabels: ["response", "error"],
+        icon: "file.png",  // TODO: Use Sparky icon after ppp-mc-6 merge
+        label: function() {
+            return this.name||"subaccounts";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="subaccounts">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="subaccounts">
+    <p>Get subaccounts setup in Sparkpost, a world class email provider <a href="https://www.sparkpost.com">Sparkpost</a></p>
+    <h3>Inputs</h3>
+        <p><code>msg.key</code> -> REQUIRED: Sparkpost API key to use.
+        <code>msg.payload.verb</code> -> REQUIRED: HTTP verb (currently only GET).
+        <code>msg.payload.id</code> -> Subaccount ID number as a string.
+        </p>
+    <h3>References</h3>
+        <ul>
+            <li><a href="https://developers.sparkpost.com/api/">Sparkpost API docs</a> - full description of <code>msg.key</code> property</li>
+        </ul>
+</script>
