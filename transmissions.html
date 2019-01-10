@@ -1,6 +1,6 @@
 <script type="text/javascript">
     RED.nodes.registerType('send-transmission',{
-        category: 'function',
+        category: 'Sparkpost',
         color: '#a6bbcf',
         defaults: {
             name: {value:""}
@@ -8,7 +8,7 @@
         inputs:1,
         outputs:2,
         outputLabels: ["response", "error"],
-        icon: "file.png",
+        icon: "sparkpost.png",
         label: function() {
             return this.name||"send-transmission";
         }
