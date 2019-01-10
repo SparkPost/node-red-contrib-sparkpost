@@ -1,13 +1,14 @@
 const SparkPost = require('sparkpost');
 const config = require('config');
 
-const client = new SparkPost('<YOUR API KEY>');
-
 module.exports = function(RED) {
     function Transmissions(config) {
         RED.nodes.createNode(this,config);
         var node = this;
+        const apiKey = this.credentials.apikey;
         node.on('input', function(msg) {
+            const client = new SparkPost(apiKey);
+
             client.transmissions.send({
                     options: {
                         sandbox: true
@@ -33,5 +34,10 @@ module.exports = function(RED) {
             node.send(msg);
         });
     }
-    RED.nodes.registerType("send-transmission",Transmissions);
+    RED.nodes.registerType("send-transmission",Transmissions,{
+        credentials: {
+            apikey: {type:"password"}
+        }
+    });
+    
 }
