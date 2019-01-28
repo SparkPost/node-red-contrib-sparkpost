@@ -10,27 +10,23 @@ module.exports = function(RED) {
             const client = new SparkPost(apiKey);
 
             client.transmissions.send({
-                    options: {
-                        sandbox: true
-                    },
                     content: {
-                        from: 'testing@sparkpostbox.com',
-                        subject: 'Hello, World!',
-                        html: '<html><body><p>Testing SparkPost - the world\'s most awesomest email service!</p></body></html>'
+                        from: msg.from,
+                        subject: msg.topic,
+                        html: msg.payload.html,
+                        text: msg.payload.text
                     },
                     recipients: [
-                        { address: '<YOUR EMAIL ADDRESS>' }
+                        { address: msg.to }
                     ]
                 })
                 .then(data => {
-                    console.log('Woohoo! You just sent your first mailing!');
                     console.log(data);
                 })
                 .catch(err => {
                     console.log('Whoops! Something went wrong');
                     console.log(err);
                 });
-            msg.payload = msg.payload.toLowerCase();
             node.send(msg);
         });
     }
