@@ -25,12 +25,12 @@
 <script type="text/x-red" data-help-name="subaccounts">
     <p>Get subaccounts setup in Sparkpost, a world class email provider <a href="https://www.sparkpost.com">Sparkpost</a></p>
     <h3>Inputs</h3>
-        <p><code>msg.key</code> -> REQUIRED: Sparkpost API key to use.
+        <p><code>msg.payload.key</code> -> REQUIRED: Sparkpost API key to use.
         <code>msg.payload.verb</code> -> REQUIRED: HTTP verb (currently only GET).
         <code>msg.payload.id</code> -> Subaccount ID number as a string.
         </p>
     <h3>References</h3>
         <ul>
-            <li><a href="https://developers.sparkpost.com/api/">Sparkpost API docs</a> - full description of <code>msg.key</code> property</li>
+            <li><a href="https://developers.sparkpost.com/api/">Sparkpost API docs</a> - full description of <code>msg.payload.key</code> property</li>
         </ul>
 </script>

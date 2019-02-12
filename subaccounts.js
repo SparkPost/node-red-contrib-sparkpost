@@ -1,6 +1,8 @@
+"use strict";
+
+var SparkPost = require('sparkpost');
 
 module.exports = function(RED) {
-    "use strict";
 
     function Subaccounts(config) {
         RED.nodes.createNode(this,config);
@@ -10,8 +12,8 @@ module.exports = function(RED) {
         node.on('input', function(msg) {
             node.debug("msg= \n" + JSON.stringify(msg, null, 2));
 
-            this.sparkpostKey = msg.topic;
-            var SparkPost = require('sparkpost');
+            this.sparkpostKey = msg.payload.key;
+
             if(!this.sparkpostKey) {
                 var key_err_msg = "Sparkpost: Missing Sparkpost credentials";
                 node.error(key_err_msg);
