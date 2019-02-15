@@ -2,7 +2,8 @@
   "name": "node-red-contrib-sparkpost",
   "node-red": {
     "nodes": {
-      "send-transmission": "transmissions.js"
+      "send-transmission": "transmissions.js",
+      "subaccounts": "subaccounts.js"
     }
   },
   "version": "0.0.1",
