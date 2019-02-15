@@ -12,15 +12,22 @@ module.exports = function(RED) {
         node.on('input', function(msg) {
             node.debug("msg= \n" + JSON.stringify(msg, null, 2));
 
-            this.sparkpostKey = msg.payload.key;
+            if (msg.payload.key) {
+                node.debug("Sparkpost: Using msg.payload.key");
+                this.apiKey = msg.payload.key;
+            }
+            else {
+                node.debug("Sparkpost: Missing msg.payload.key, use credentials.apiKey");
+                this.apiKey = this.credentials.apiKey;
+            }
 
-            if(!this.sparkpostKey) {
+            if(!this.apiKey) {
                 var key_err_msg = "Sparkpost: Missing Sparkpost credentials";
                 node.error(key_err_msg);
                 node.send([ { payload: null }, { payload: key_err_msg } ]);
                 return;
             }
-            var client = new SparkPost(this.sparkpostKey);
+            var client = new SparkPost(this.apiKey);
 
             // {"verb":"GET","id":""}
             this.verb = msg.payload.verb.toLowerCase();
@@ -74,5 +81,9 @@ module.exports = function(RED) {
             }
         });
     }
-    RED.nodes.registerType("subaccounts",Subaccounts);
+    RED.nodes.registerType("subaccounts",Subaccounts,{
+        credentials: {
+            apiKey: {type:"password"}
+        }
+    });
 };
